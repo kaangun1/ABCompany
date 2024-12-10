@@ -1,0 +1,42 @@
+﻿@model Unite
+
+<div class="card">
+    <div class="card-header">
+        <h4>@Model.UniteName</h4>
+
+    </div>
+    <div class="card-body">
+        <form asp-action="Update"  method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="CreateDate" />
+
+            <div class="row mb-4">
+                <div class="col-3">
+                    <label asp-for="UniteName"></label>
+                </div>
+                <div class="col-5">
+                    @*  <input type="text" data-val="true" data-val-minlength-min="3" data-val-min="En az 3 karakter olmalidir." id="product1" name="product1" placeholder="Manuel yazilan urun girisi"/> *@
+                    <input asp-for="UniteName" />
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="UniteName" class="text-danger"></span>
+                </div>
+            </div>
+            
+
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+            <button type="reset" class="btn btn-info">Formu Temizle</button>
+           
+
+
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    @*  @await Html.PartialAsync("_ValidationScriptsPartial"); *@
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

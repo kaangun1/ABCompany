@@ -1,0 +1,127 @@
+﻿@using AB.MVC.Models.VMS.ProductVM
+@model ProductUpdateVM
+
+<div class="card">
+    <div class="card-header">
+        <h4>@Model.ProductName</h4>
+      
+    </div>
+    <div class="card-body">
+        <form asp-action="Update" asp-controller="Product" method="post">
+            <div asp-validation-summary="All" class="text-danger" ></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row" >
+                <div class="col-3" >
+                    <label asp-for="ProductName"></label>
+                </div>
+                <div class="col-5" >
+                   @*  <input type="text" data-val="true" data-val-minlength-min="3" data-val-min="En az 3 karakter olmalidir." id="product1" name="product1" placeholder="Manuel yazilan urun girisi"/> *@
+                    <input asp-for="ProductName"/>
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="ProductName" class="text-danger" ></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <label asp-for="ProductCode"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="ProductCode" />
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="ProductCode" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <label asp-for="Description"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Description" />
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-3">
+                    <label asp-for="Price"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Price" type="number"/>
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-3">
+                    <label asp-for="Amount"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Amount" type="number"/>
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="Amount" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-3">
+                    <label asp-for="Unites"></label>
+                </div>
+                <div class="col-5">
+                    <select asp-for="UniteId">
+                       @foreach(var item in Model.Unites.ToList())
+                       {
+                           <option name="@item.UniteName" id="@item.Id" value="@item.Id">@item.UniteName</option>
+                       }
+                    </select>
+                    <input asp-for="Amount" type="number" />
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="Amount" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-3">
+                    <label> Categories</label>
+                </div>
+                <div class="col-5">
+                    @* Manuel olustursaydik bu şekilde yapilmasi gerekirdi.
+                        <input type="checkbox" value="1" id="yiyecek" />
+                    <label for="yiyecek">Yiyecek</label>
+                    <input type="checkbox" value="2" id="Tekstil" checked/>
+                    <label for="Tekstil">Tekstil</label>
+                    <input type="checkbox" value="3" id="Icecek" />
+                    <label for="Icecek">Icecek</label> *@
+
+                    @for (int i = 0; i < Model.Categories.Count; i++)
+                    {
+                        <input asp-for="@Model.Categories[i].IsChecked" type="checkbox" />
+                        <label asp-for="@Model.Categories[i].IsChecked">@Model.Categories[i].CategoryName</label>
+                        <input type="hidden" asp-for="@Model.Categories[i].Id" />
+                        <input type="hidden" asp-for="@Model.Categories[i].CategoryName" />
+
+                    }
+
+                </div>
+
+            </div>
+
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+                <button type="reset" class="btn btn-info">Formu Temizle</button>
+                <button class="btn btn-danger" type="button">Test</button>
+           
+            
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+   @*  @await Html.PartialAsync("_ValidationScriptsPartial"); *@
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

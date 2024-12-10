@@ -1,0 +1,28 @@
+﻿@using AB.MVC.Models.VMS.AccountVM
+@model LoginVM
+
+<div class="card">
+    <div class="card-header">
+        <h4>Login Sayfasi</h4>
+    </div>
+
+    <div class="card-body">
+        <form asp-action="Login" method="post">
+            <div class="mt-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control"/>
+            </div>
+            <div class="">
+                <label asp-for="Password" class="form-label"></label>
+                <input asp-for="Password" class="form-control" />
+            </div>
+            <div class="">
+                <label asp-for="RememberMe" class="form-label"></label>
+                <input asp-for="RememberMe" class="" />
+            </div>
+            <div class="">
+                <button type="submit" class="btn btn-primary">Giris</button>
+            </div>
+        </form>
+    </div>
+</div>

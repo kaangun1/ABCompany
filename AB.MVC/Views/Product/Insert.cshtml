@@ -1,0 +1,121 @@
+﻿@using AB.MVC.Models.VMS.ProductVM
+@model ProductEkleVM
+
+<div class="card">
+    <div class="card-header">
+        <h4>@Model.ProductName</h4>
+
+    </div>
+    <div class="card-body">
+        <form asp-action="Insert" asp-controller="Product" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row">
+                <div class="col-3">
+                    <label asp-for="ProductName"></label>
+                </div>
+                <div class="col-5">
+                    @*  <input type="text" data-val="true" data-val-minlength-min="3" data-val-min="En az 3 karakter olmalidir." id="product1" name="product1" placeholder="Manuel yazilan urun girisi"/> *@
+                    <input asp-for="ProductName" />
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <label asp-for="ProductCode"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="ProductCode" />
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="ProductCode" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <label asp-for="Description"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Description" />
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-3">
+                    <label asp-for="Price"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Price" type="number" />
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <label asp-for="Amount"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Amount" type="number" />
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="Amount" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <label asp-for="Categories"></label>
+                </div>
+                <div class="col-5">
+                    @for(int i=0; i<Model.Categories.Count;i++)
+                    {
+                        <input type="checkbox"  asp-for="@Model.Categories[i].IsCheck"/>
+                        <label asp-for="@Model.Categories[i].IsCheck">@Model.Categories[i].CategoryName</label>
+                        <input type="hidden" asp-for="@Model.Categories[i].CategoryName" />
+                        <input type="hidden" asp-for="@Model.Categories[i].Id" />
+
+                   }
+
+                </div>
+           </div>
+            <div class="row mb-4">
+                <div class="col-3">
+                    <label asp-for="Units"></label>
+                </div>
+                <div class="col-5">
+                    <select asp-for="UniteId">
+                        @foreach (var unit in Model.Units)
+                        {
+                            <option id="@unit.UniteName"
+                                    name="@unit.UniteName"
+                                    value="@unit.Id">
+                                @unit.UniteName
+                            </option>
+                        }
+                    </select>
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="Units" class="text-danger"></span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+            <button type="reset" class="btn btn-info">Formu Temizle</button>
+            <button class="btn btn-danger" type="button">Test</button>
+
+
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    @*  @await Html.PartialAsync("_ValidationScriptsPartial"); *@
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
